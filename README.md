@@ -2,55 +2,80 @@
 <html lang="el">
 <head>
   <meta charset="UTF-8">
-  <title>Εγώ</title>
+  <title>Νέστορας - Προσωπική Σελίδα</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       text-align: center;
-      background-color: #f0f0f0;
+      background-color: #e8f0fe;
       margin: 0;
       padding: 2rem;
     }
+
     .profile-img {
       width: 200px;
       border-radius: 50%;
       margin-bottom: 1rem;
       box-shadow: 0 0 10px rgba(0,0,0,0.2);
     }
+
     .container {
       background-color: white;
       padding: 2rem;
       border-radius: 1rem;
       box-shadow: 0 0 20px rgba(0,0,0,0.1);
-      max-width: 700px;
+      max-width: 800px;
       margin: auto;
     }
+
     #main-content {
       display: none;
     }
+
     button {
-      padding: 0.5rem 1rem;
+      padding: 0.7rem 1.5rem;
       font-size: 1rem;
       border-radius: 0.5rem;
       border: none;
       background-color: #007bff;
       color: white;
       cursor: pointer;
-      margin-top: 1rem;
+      margin: 0.5rem;
+      transition: background-color 0.3s;
     }
+
     button:hover {
       background-color: #0056b3;
     }
+
     .section {
       margin-top: 2rem;
       text-align: left;
     }
+
     ul {
       list-style-type: square;
       padding-left: 1.5rem;
     }
+
     .semester {
       margin-top: 1rem;
+    }
+
+    .panellinies-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 1rem;
+    }
+
+    .panellinies-buttons button {
+      flex: 1 1 150px;
+      background-color: #28a745;
+    }
+
+    .panellinies-buttons button:hover {
+      background-color: #1e7e34;
     }
   </style>
 </head>
@@ -113,12 +138,26 @@
         </ul>
       </div>
     </div>
+
+    <!-- Θέματα Πανελληνίων -->
+    <button onclick="togglePanellinies()">Θέματα Πανελληνίων</button>
+    <div id="panellinies" class="section" style="display: none;">
+      <h3>📄 Θέματα Πανελληνίων</h3>
+      <div class="panellinies-buttons">
+        <button onclick="window.open('assets/panellinies/2020.pdf')">Θέματα 2020</button>
+        <button onclick="window.open('assets/panellinies/2021.pdf')">Θέματα 2021</button>
+        <button onclick="window.open('assets/panellinies/2022.pdf')">Θέματα 2022</button>
+        <button onclick="window.open('assets/panellinies/2023.pdf')">Θέματα 2023</button>
+        <button onclick="window.open('assets/panellinies/2024.pdf')">Θέματα 2024</button>
+      </div>
+    </div>
+
   </div>
 
   <script>
     // Κωδικός πρόσβασης
     window.onload = function() {
-      const secretCode = "1234"; // 🔒 Εδώ βάλε τον δικό σου κωδικό
+      const secretCode = "1234"; // Βάλε εδώ τον δικό σου κωδικό
       const userInput = prompt("Εισάγετε τον κωδικό πρόσβασης:");
 
       if (userInput === secretCode) {
@@ -128,18 +167,22 @@
       }
     };
 
-    // Εναλλαγή Πτυχίων
     function toggleDegrees() {
       const section = document.getElementById("degrees");
       section.style.display = (section.style.display === "none") ? "block" : "none";
     }
 
-    // Εναλλαγή Βαθμών
     function toggleGrades() {
       const section = document.getElementById("grades");
+      section.style.display = (section.style.display === "none") ? "block" : "none";
+    }
+
+    function togglePanellinies() {
+      const section = document.getElementById("panellinies");
       section.style.display = (section.style.display === "none") ? "block" : "none";
     }
   </script>
 
 </body>
 </html>
+
