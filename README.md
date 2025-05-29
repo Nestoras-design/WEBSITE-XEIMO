@@ -24,6 +24,7 @@
       box-shadow: 0 0 20px rgba(0,0,0,0.1);
       max-width: 700px;
       margin: auto;
+      position: relative;
     }
     #main-content {
       display: none;
@@ -37,6 +38,7 @@
       color: white;
       cursor: pointer;
       margin-top: 1rem;
+      transition: background-color 0.3s ease;
     }
     button:hover {
       background-color: #0056b3;
@@ -65,6 +67,32 @@
       box-shadow: 0 0 15px rgba(0,123,255,0.5);
       font-family: 'Courier New', monospace;
       letter-spacing: 3px;
+    }
+    /* Στυλ για social media */
+    .social-media {
+      margin-top: 3rem;
+      text-align: center;
+    }
+    .social-media a {
+      display: inline-block;
+      background: #E1306C;
+      color: white;
+      width: 48px;
+      height: 48px;
+      line-height: 48px;
+      border-radius: 50%;
+      text-decoration: none;
+      font-size: 24px;
+      transition: background 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+    .social-media a:hover {
+      background: #C13584;
+      box-shadow: 0 4px 12px rgba(193,53,132,0.6);
+    }
+    .social-media a svg {
+      vertical-align: middle;
+      fill: white;
     }
   </style>
 </head>
@@ -139,7 +167,29 @@
       <button onclick="openPDF('2023')">Θέματα 2023</button>
       <button onclick="openPDF('2024')">Θέματα 2024</button>
     </div>
-  </div>
+
+    <div style="margin-top: 2rem; text-align: center;">
+  <h3>Το Facebook μου</h3>
+  <button
+    onclick="window.open('https://www.facebook.com/ntinanwntas.xeimwnopoylos/?locale=el_GR', '_blank')"
+    style="
+      padding: 0.7rem 1.5rem;
+      font-size: 1.1rem;
+      border-radius: 0.5rem;
+      border: none;
+      background-color: #3b5998;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    "
+    onmouseover="this.style.backgroundColor='#2d4373';"
+    onmouseout="this.style.backgroundColor='#3b5998';"
+  >
+    Facebook
+  </button>
+</div>
+
+
 
   <script>
     // Κωδικός πρόσβασης
