@@ -1,81 +1,70 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-  <meta charset="UTF-8">
-  <title>Νέστορας - Προσωπική Σελίδα</title>
+  <meta charset="UTF-8" />
+  <title>Εγώ</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       text-align: center;
-      background-color: #e8f0fe;
+      background-color: #f0f0f0;
       margin: 0;
       padding: 2rem;
     }
-
     .profile-img {
       width: 200px;
       border-radius: 50%;
       margin-bottom: 1rem;
       box-shadow: 0 0 10px rgba(0,0,0,0.2);
     }
-
     .container {
       background-color: white;
       padding: 2rem;
       border-radius: 1rem;
       box-shadow: 0 0 20px rgba(0,0,0,0.1);
-      max-width: 800px;
+      max-width: 700px;
       margin: auto;
     }
-
     #main-content {
       display: none;
     }
-
     button {
-      padding: 0.7rem 1.5rem;
+      padding: 0.5rem 1rem;
       font-size: 1rem;
       border-radius: 0.5rem;
       border: none;
       background-color: #007bff;
       color: white;
       cursor: pointer;
-      margin: 0.5rem;
-      transition: background-color 0.3s;
+      margin-top: 1rem;
     }
-
     button:hover {
       background-color: #0056b3;
     }
-
     .section {
       margin-top: 2rem;
       text-align: left;
     }
-
     ul {
       list-style-type: square;
       padding-left: 1.5rem;
     }
-
     .semester {
       margin-top: 1rem;
     }
-
-    .panellinies-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 1rem;
-    }
-
-    .panellinies-buttons button {
-      flex: 1 1 150px;
-      background-color: #28a745;
-    }
-
-    .panellinies-buttons button:hover {
-      background-color: #1e7e34;
+    /* Στυλ για το live ρολόι */
+    #live-clock {
+      font-size: 3rem;
+      font-weight: bold;
+      background: #007bff;
+      color: white;
+      width: 220px;
+      margin: 1rem auto 2rem auto;
+      padding: 1rem;
+      border-radius: 1rem;
+      box-shadow: 0 0 15px rgba(0,123,255,0.5);
+      font-family: 'Courier New', monospace;
+      letter-spacing: 3px;
     }
   </style>
 </head>
@@ -85,6 +74,8 @@
     <img src="nestoras.png" alt="Η φωτογραφία μου" class="profile-img">
     <h1>Γεια σου! Είμαι ο Νέστορας</h1>
     <p>Αυτή είναι η προσωπική μου σελίδα!</p>
+
+    <div id="live-clock">--:--:--</div>
 
     <!-- Πτυχία -->
     <button onclick="toggleDegrees()">Δες τα πτυχία μου</button>
@@ -141,23 +132,19 @@
 
     <!-- Θέματα Πανελληνίων -->
     <button onclick="togglePanellinies()">Θέματα Πανελληνίων</button>
-    <div id="panellinies" class="section" style="display: none;">
-      <h3>📄 Θέματα Πανελληνίων</h3>
-      <div class="panellinies-buttons">
-        <button onclick="window.open('assets/panellinies/2020.pdf')">Θέματα 2020</button>
-        <button onclick="window.open('assets/panellinies/2021.pdf')">Θέματα 2021</button>
-        <button onclick="window.open('assets/panellinies/2022.pdf')">Θέματα 2022</button>
-        <button onclick="window.open('assets/panellinies/2023.pdf')">Θέματα 2023</button>
-        <button onclick="window.open('assets/panellinies/2024.pdf')">Θέματα 2024</button>
-      </div>
+    <div id="panellinies" class="section" style="display:none;">
+      <button onclick="openPDF('2020')">Θέματα 2020</button>
+      <button onclick="openPDF('2021')">Θέματα 2021</button>
+      <button onclick="openPDF('2022')">Θέματα 2022</button>
+      <button onclick="openPDF('2023')">Θέματα 2023</button>
+      <button onclick="openPDF('2024')">Θέματα 2024</button>
     </div>
-
   </div>
 
   <script>
     // Κωδικός πρόσβασης
     window.onload = function() {
-      const secretCode = "1234"; // Βάλε εδώ τον δικό σου κωδικό
+      const secretCode = "1234"; // 🔒 Εδώ βάλε τον δικό σου κωδικό
       const userInput = prompt("Εισάγετε τον κωδικό πρόσβασης:");
 
       if (userInput === secretCode) {
@@ -165,24 +152,42 @@
       } else {
         document.body.innerHTML = "<h1>⛔ Πρόσβαση απορρίφθηκε</h1><p>Λάθος κωδικός.</p>";
       }
+      updateClock();
+      setInterval(updateClock, 1000);
     };
 
+    // Εναλλαγή Πτυχίων
     function toggleDegrees() {
       const section = document.getElementById("degrees");
       section.style.display = (section.style.display === "none") ? "block" : "none";
     }
 
+    // Εναλλαγή Βαθμών
     function toggleGrades() {
       const section = document.getElementById("grades");
       section.style.display = (section.style.display === "none") ? "block" : "none";
     }
 
+    // Εναλλαγή Θεμάτων Πανελληνίων
     function togglePanellinies() {
       const section = document.getElementById("panellinies");
       section.style.display = (section.style.display === "none") ? "block" : "none";
+    }
+
+    // Άνοιγμα PDF
+    function openPDF(year) {
+      window.open(`assets/panellinies/${year}.pdf`, '_blank');
+    }
+
+    // Live ρολόι
+    function updateClock() {
+      const now = new Date();
+      let h = now.getHours().toString().padStart(2, '0');
+      let m = now.getMinutes().toString().padStart(2, '0');
+      let s = now.getSeconds().toString().padStart(2, '0');
+      document.getElementById('live-clock').textContent = `${h}:${m}:${s}`;
     }
   </script>
 
 </body>
 </html>
-
