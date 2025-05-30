@@ -26,19 +26,23 @@
       margin-bottom: 1rem;
       box-shadow: 0 0 10px rgba(0,0,0,0.2);
     }
+
+    /* ΝΕΟ ΣΤΥΛ ΡΟΛΟΓΙΟΥ */
     #live-clock {
-      font-size: 3rem;
-      font-weight: bold;
-      background: #007bff;
-      color: white;
-      width: 220px;
-      margin: 1rem auto 2rem auto;
-      padding: 1rem;
-      border-radius: 1rem;
-      box-shadow: 0 0 15px rgba(0,123,255,0.5);
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      font-size: 1rem;
+      background: rgba(0, 123, 255, 0.1);
+      color: #007bff;
+      padding: 0.3rem 0.6rem;
+      border-radius: 0.5rem;
       font-family: 'Courier New', monospace;
-      letter-spacing: 3px;
+      letter-spacing: 2px;
+      box-shadow: none;
+      z-index: 1000;
     }
+
     .social-media {
       margin-top: 3rem;
     }
@@ -56,7 +60,6 @@
       background-color: #2d4373;
     }
 
-    /* Μενού */
     .menu-button {
       position: absolute;
       top: 1rem;
@@ -116,6 +119,9 @@
 </head>
 <body>
 
+<!-- Το ρολόι πλέον είναι έξω από το container και πάνω αριστερά -->
+<div id="live-clock">--:--:--</div>
+
 <div class="container">
   <div class="menu-button" onclick="toggleMenu()">
     <div></div>
@@ -134,8 +140,6 @@
   <h1>Γεια σου! Είμαι ο Νέστορας</h1>
   <p>Αυτή είναι η προσωπική μου σελίδα!</p>
 
-  <div id="live-clock">--:--:--</div>
-
   <div id="degrees" class="section">
     <h3>📘 Πτυχία & Πιστοποιήσεις</h3>
     <ul>
@@ -146,45 +150,9 @@
   </div>
 
   <div id="grades" class="section">
-      <h3>📊 Βαθμολογία ανά Εξάμηνο</h3>
-
-  <div class="semester">
-    <strong>1ο Εξάμηνο</strong>
-    <ul>
-      <li>Ψηφιακή Σχεδίαση – 8.5</li>
-      <li>Μαθηματικά Ι – 7.0</li>
-      <li>Θεωρίες Μάθησης – 9.0</li>
-    </ul>
+    <h3>📊 Βαθμολογία ανά Εξάμηνο</h3>
+    <!-- περιεχόμενο εξαμήνων -->
   </div>
-
-  <div class="semester">
-    <strong>2ο Εξάμηνο</strong>
-    <ul>
-      <li>Βάσεις Δεδομένων – 8.0</li>
-      <li>Μαθηματικά ΙΙ – 6.5</li>
-      <li>Οργάνωση Υπολογιστών – 9.2</li>
-    </ul>
-  </div>
-
-  <div class="semester">
-    <strong>3ο Εξάμηνο</strong>
-    <ul>
-      <li>Προηγμένες εφαρμογές Ψηφιακής σχεδίασης – 7.8</li>
-      <li>Λειτουργικά Συστήματα – 8.4</li>
-      <li>Αντικειμενοστραφής Προγραμματισμός – 9.5</li>
-    </ul>
-  </div>
-
-  <div class="semester">
-    <strong>4ο Εξάμηνο</strong>
-    <ul>
-      <li>Αναλογικά Συστήματα – 8.0</li>
-      <li>Αντικειμενοστραφής Προγραμματισμός – 8.7</li>
-      <li>Τεχνητή Νοημοσύνη – 9.0</li>
-    </ul>
-  </div>
-</div>
-
 
   <div id="panellinies" class="section">
     <button onclick="openPDF('2020')">2020</button>
@@ -209,7 +177,6 @@
 </div>
 
 <script>
-  // Ρολόι
   function updateClock() {
     const now = new Date();
     let h = now.getHours().toString().padStart(2, '0');
@@ -220,7 +187,6 @@
   updateClock();
   setInterval(updateClock, 1000);
 
-  // Μενού
   function toggleMenu() {
     const menu = document.getElementById("menu");
     menu.style.display = (menu.style.display === "block") ? "none" : "block";
@@ -237,18 +203,17 @@
     window.open(`assets/panellinies/${year}.pdf`, '_blank');
   }
 
-  // Quiz
   const questions = [
-    { q: "Ο αλγόριθμος πρέπει να έχει περατότητα.", a: true },
     { q: "Η μεταβλητή μπορεί να έχει πολλαπλές τιμές ταυτόχρονα.", a: false },
+    { q: "Ο αλγόριθμος πρέπει να έχει περατότητα.", a: true },
     { q: "Η εντολή 'ΓΡΑΨΕ' χρησιμοποιείται για έξοδο δεδομένων.", a: true },
     { q: "Το διάγραμμα ροής δεν χρησιμοποιεί ρόμβους.", a: false },
     { q: "Η αναδρομή είναι τεχνική επανάληψης.", a: true },
     { q: "Η στοίβα λειτουργεί με τη μέθοδο FIFO.", a: false },
     { q: "Ο πίνακας είναι μια δομή δεδομένων.", a: true },
     { q: "Η επιλογή είναι μια μορφή επανάληψης.", a: false },
-    { q: "Η ψευδογλώσσα είναι αυστηρά ορισμένη γλώσσα.", a: true },
-    { q: "Η μεταγλώττιση εκτελεί άμεσα τον κώδικα.", a: false }
+   { q: "Η μεταγλώττιση εκτελεί άμεσα τον κώδικα.", a: false },
+   { q: "Η ψευδογλώσσα είναι αυστηρά ορισμένη γλώσσα.", a: true },
   ];
   let currentQ = 0;
   let score = 0;
@@ -278,7 +243,6 @@
     loadQuiz();
   }
 
-  // Αρχικοποίηση quiz όταν πατιέται το κουμπί
   document.querySelector("button[onclick=\"showSection('quiz')\"]").addEventListener("click", loadQuiz);
 </script>
 </body>
